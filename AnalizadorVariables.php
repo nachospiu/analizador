@@ -1,6 +1,6 @@
 <?php
 
-class Analizador {
+class AnalizadorVariables {
 	
 	public function metodoPrincipal() {
 		$file_path = "/var/www/analizador/ejemplo.php";
