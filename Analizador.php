@@ -1,7 +1,7 @@
 <?php
 
 class Analizador {
-
+	
 	public function metodoPrincipal() {
 		$file_path = "/var/www/analizador/ejemplo.php";
 		
@@ -9,6 +9,16 @@ class Analizador {
 		
 		$tokens = token_get_all($source);
 		
+		$this->buscarVariablesNoDefinidas($tokens);
+	}
+
+	/**
+	 * Busca en el código (tokens del archivo) la utilización de variables
+	 * no definidas.
+	 * 
+	 * @param array() $tokens
+	 */
+	private function buscarVariablesNoDefinidas($tokens) {		
 		$funciones = array();
 		
 		//var_dump($tokens);
@@ -21,7 +31,7 @@ class Analizador {
 							$funciones[max(array_keys($funciones))]['variables'][] = $token[1];
 						} else {
 							if($token[1] !== '$this') { //TODO: por ahora los $this no los tenemos en cuenta, habría que fijarse si está definido en la clase.
-								var_dump('Error: Variable no definida.');
+								var_dump('Error: Variable ' . $token[1] . ' no definida (linea ' . $token[2] . ').');
 							}
 						}
 					}
@@ -66,6 +76,14 @@ class Analizador {
 	}
 
 
+	/**
+	 * Retorna true Si el token que está en la posición $nroToken es una variable de clase
+	 * en el momento en que está se define, o si es un parametro de un método de una clase,
+	 * o si es na variable a la que se le está asignando un valor. Falso en caso contrario.
+	 * @param unknown $nroToken
+	 * @param unknown $tokens
+	 * @return boolean
+	 */
 	private function esDefinicionDeVariable($nroToken, $tokens) {
 		return $this->esT_VAR($nroToken, $tokens) || 
 					$this->esParametro($nroToken, $tokens) || 
@@ -75,7 +93,7 @@ class Analizador {
 	
 	/**
 	 * Si el token que está en la posición $nroToken es una variable de clase
-	 * retorna true, falso en caso contrario.
+	 * en el momento en que está se define, retorna true, falso en caso contrario.
 	 *
 	 * @param int $nroToken
 	 * @param array() $tokens
