@@ -34,6 +34,8 @@ class Spinach extends Vegetable {
    {
        $this->Vegetable(true, "green");
        
+       funccion($hola);
+       
        if(true) {}
    }
 
@@ -44,6 +46,8 @@ class Spinach extends Vegetable {
 
    function is_cooked() 
    {
+   		var_dump($uno);
+   	
        return $this->cooked;
    }
    
