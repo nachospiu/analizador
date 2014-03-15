@@ -33,6 +33,8 @@ class Spinach extends Vegetable {
    function Spinach() 
    {
        $this->Vegetable(true, "green");
+       
+       if(true) {}
    }
 
    function cook_it() 
