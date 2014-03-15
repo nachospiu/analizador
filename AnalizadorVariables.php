@@ -2,7 +2,7 @@
 
 class AnalizadorVariables {
 	
-	public function metodoPrincipal() {
+	/*public function metodoPrincipal() {
 		$file_path = "/var/www/analizador/ejemplo.php";
 		
 		$source = file_get_contents($file_path);
@@ -10,7 +10,7 @@ class AnalizadorVariables {
 		$tokens = token_get_all($source);
 		
 		$this->buscarVariablesNoDefinidas($tokens);
-	}
+	}*/
 
 	/**
 	 * Busca en el código (tokens del archivo) la utilización de variables
@@ -18,7 +18,7 @@ class AnalizadorVariables {
 	 * 
 	 * @param array() $tokens
 	 */
-	private function buscarVariablesNoDefinidas($tokens) {		
+	public function buscarVariablesNoDefinidas(&$tokens) {		
 		$funciones = array();
 		
 		//var_dump($tokens);
