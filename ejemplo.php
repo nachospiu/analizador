@@ -34,7 +34,7 @@ class Spinach extends Vegetable {
    {
        $this->Vegetable(true, "green");
        
-       funccion($hola);
+       funccion($variableNoDefinida);
        
        if(true) {}
    }
