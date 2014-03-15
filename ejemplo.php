@@ -41,6 +41,8 @@ class Spinach extends Vegetable {
 
    function cook_it() 
    {
+   		var_dump($color);
+   	
        $this->cooked = true;
    }
 
