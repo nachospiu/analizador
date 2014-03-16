@@ -35,11 +35,14 @@ class AnalizadorPrincipal {
 		
 			if(! is_dir($pathCompleto)) {
 				if(preg_match($this->extensionesAAnalizar, $pathCompleto)) {
+					
+					var_dump($pathCompleto);
+					
 					$source = file_get_contents($pathCompleto);
 		
 					$tokens = token_get_all($source);
 						
-					$analizadorVariables->buscarVariablesNoDefinidas($tokens);
+					$analizadorVariables->analizar($tokens);
 				}
 			} else {
 				if($this->analisisRecursivo && ! preg_match('/^\./', $file)) { //No entro en directorios que empiezan con un .

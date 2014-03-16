@@ -1,6 +1,8 @@
 <?php
 
-class AnalizadorVariables {
+require_once 'AnalizadorGeneral.php';
+
+class AnalizadorVariables extends AnalizadorGeneral {
 	
 	private static $instance;
 	
@@ -26,6 +28,10 @@ class AnalizadorVariables {
 		$this->buscarVariablesNoDefinidas($tokens);
 	}*/
 
+	public function analizar(&$tokens) {
+		$this->buscarVariablesNoDefinidas($tokens);
+	}
+	
 	/**
 	 * Busca en el código (tokens del archivo) la utilización de variables
 	 * no definidas.
