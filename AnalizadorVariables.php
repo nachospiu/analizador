@@ -2,6 +2,20 @@
 
 class AnalizadorVariables {
 	
+	private static $instance;
+	
+	private function __construtc() {
+		
+	}
+	
+	public static function getInstance() {
+		if(! isset(self::$instance)) {
+			self::$instance = new AnalizadorVariables();
+		}
+		
+		return self::$instance;
+	}
+	
 	/*public function metodoPrincipal() {
 		$file_path = "/var/www/analizador/ejemplo.php";
 		

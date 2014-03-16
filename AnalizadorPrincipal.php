@@ -28,7 +28,7 @@ class AnalizadorPrincipal {
 	private function analizarDirectorio($pathAlDirectorio) {
 		$dirContent = $this->scanearDirectorio($pathAlDirectorio);
 		
-		$analizadorVariables = new AnalizadorVariables(); //TODO: esto está mal acá, porque lo crea cada vez que lo llama la recursión, por ahí puede ser singleton.
+		$analizadorVariables = AnalizadorVariables::getInstance();
 		
 		foreach($dirContent as $file) {
 			$pathCompleto = $pathAlDirectorio . $file;
