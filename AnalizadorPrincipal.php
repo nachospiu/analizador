@@ -22,22 +22,30 @@ class AnalizadorPrincipal {
 	 * En principio se analizarán solo archivos *.php
 	 */
 	public function iniciarAnalisisCompleto() {
-		$dirContent = $this->scanearDirectorio($this->directorioAAnalizar);
+		$this->analizarDirectorio($this->directorioAAnalizar);
+	}
+	
+	private function analizarDirectorio($pathAlDirectorio) {
+		$dirContent = $this->scanearDirectorio($pathAlDirectorio);
 		
-		$analizadorVariables = new AnalizadorVariables();
+		$analizadorVariables = new AnalizadorVariables(); //TODO: esto está mal acá, porque lo crea cada vez que lo llama la recursión.
 		
 		foreach($dirContent as $file) {
-			$pathCompleto = $this->directorioAAnalizar . $file;
-						
+			$pathCompleto = $pathAlDirectorio . $file;
+		
 			if(! is_dir($pathCompleto)) {
 				if(preg_match($this->extensionesAAnalizar, $pathCompleto)) {
 					$source = file_get_contents($pathCompleto);
 		
 					$tokens = token_get_all($source);
-					
+						
 					$analizadorVariables->buscarVariablesNoDefinidas($tokens);
 				}
-			} 
+			} else {
+				if($this->analisisRecursivo && ! preg_match('/^\./', $file)) { //No entro en directorios que empiezan con un .
+					$this->analizarDirectorio($pathCompleto . '/');
+				}
+			}
 		}
 	}
 	

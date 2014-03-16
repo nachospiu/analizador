@@ -8,7 +8,7 @@ $a = new Analizador();
 $a->metodoPrincipal();
 */
 
-$ap = new AnalizadorPrincipal("/var/www/analizador/");
+$ap = new AnalizadorPrincipal("/var/www/");
 
 $ap->iniciarAnalisisCompleto();
 
